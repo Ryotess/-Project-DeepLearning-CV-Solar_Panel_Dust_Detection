@@ -1,0 +1,73 @@
+Solar Dust Detection
+
+{Data}
+2562 image: 1493 Clean, 1069 Dusty
+
+train: 1710 images(balaced)
+valid: 257 images
+test: 595 images
+
+{preprocessing}
+data augmentation: train data horizontal flip
+all data reshape to 300X300
+
+{Model Settings}
+[Global settings]
+loss = 'categorical_crossentropy'
+callback:
+- earlystopping: 3, val acc
+
+1.ResNet50 based
+
+- SGD(learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+- batch size = 10, epochs = 20
+
+test acc: 0.388, valid acc: 0.518, train acc: 0.562
+
+- SGD(learning_rate=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
+- batch size = 10, epochs = 20
+
+test acc: 0.76, valid acc: 0.79, train acc: 0.984
+
+
+- SGD(learning_rate=0.0005, decay=1e-6, momentum=0.9, nesterov=True)
+- batch size = 10, epochs = 20
+
+test acc: 0.834, valid acc: 0.79, train acc: 0.975
+
+- SGD(learning_rate=0.0005, decay=1e-6, momentum=0.9, nesterov=True)
+- 3 FC Dense(2)
+- batch size = 10, epochs = 100(stop at 12)
+- earlystopping: 5, val acc
+test acc: 0.90, valid acc: 0.836, train acc: 0.992
+
+
+
+2. VGG19
+
+- SGD(learning_rate=0.0001, momentum=0.9, nesterov=True)
+- batch size = 10, epochs = 20
+
+test acc: 0.70, valid acc: 0.712, train acc: 0.752
+
+
+3. Efficient Net
+- SGD(learning_rate=0.001, decay=1e-6, momentum=0.9, nesterov=True)
+- batch size = 10, epochs = 20
+
+test acc: 0.859, valid acc: 0.852, train acc: 0.99
+
+
+4. My model
+
+
+test acc: 0.469, valid acc: 0.576, train acc: 0.664
+
+
+5. Xception
+- SGD(learning_rate=0.0005, decay=1e-6, momentum=0.9, nesterov=True)
+- 3 FC Dense(2)
+- batch size = 10, epochs = 100(stop at 37)
+- earlystopping: 10, val acc
+
+test acc: 0.832, valid acc: 0.821, train acc: 0.996
